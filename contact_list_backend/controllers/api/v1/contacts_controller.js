@@ -2,7 +2,14 @@ const Contact = require("../../../models/contact_schema")
 module.exports.new = async (req, res) => {
     // console.log(req.body);
     try {
-        //TODO: check if contact with same email and mobile number
+        //check if contact with same email and mobile number
+        let contactSearched = await Contact.findOne({email: req.body.email, mobile: req.body.mobile})
+        if (contactSearched) {
+            return res.json(409, {
+                message: "User Already Exist",
+                data: contactSearched
+            })
+        }
         //Creating Contact
         let contact = await Contact.create(req.body);
         //Sending contact to user after creating
@@ -51,6 +58,26 @@ module.exports.delete = async (req, res) => {
 module.exports.update = async (req, res) => {
     console.log(req.query);
     try {
+//        check if user with requested email and mobile already exists
+        let options = {}
+        if (req.query.name) {
+            options.name = req.query.name;
+        }
+        //Checking if email is requested to be updated
+        if (req.query.email) {
+            options.email = req.query.email;
+        }
+        //    Checking if mobile is requested to be updated
+        if (req.query.mobile) {
+            options.mobile = req.query.mobile;
+        }
+        let contactSearched = await Contact.findOne(options);
+        if (contactSearched) {
+            return res.json(409, {
+                message: "User Already Exist",
+                data: contactSearched
+            })
+        }
 //    find if user to update exist in db
         let contact = await Contact.findById(req.query.id);
         console.log("contact", contact)
