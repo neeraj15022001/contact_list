@@ -7,6 +7,8 @@ import {useContext} from "react";
 import {DrawerContext} from "../../context/DrawerContext";
 import {styled} from "@mui/material/styles";
 import ContactsAppBar from "./Components/ContactsAppBar/ContactsAppBar";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import NewContact from "./Components/NewContact/NewContact";
 
 const drawerWidth = 240;
 const Main = styled('main', {shouldForwardProp: (prop) => prop !== 'open'})(
@@ -37,18 +39,26 @@ const DrawerHeader = styled('div')(({theme}) => ({
 }));
 
 function Body() {
-
     const [open, setOpen] = useContext(DrawerContext);
     return (
-        <Box sx={{display: 'flex'}}>
-            <CssBaseline/>
-            <ContactsAppBar/>
-            <ContactsDrawer/>
-            <Main open={open}>
-                <DrawerHeader/>
-                <ContactsTable/>
-            </Main>
-        </Box>
+        <BrowserRouter>
+            <Box sx={{display: 'flex'}}>
+                <CssBaseline/>
+                <ContactsAppBar/>
+                <ContactsDrawer/>
+                <Main open={open}>
+                    <DrawerHeader/>
+                    <Routes>
+                        <Route exact path={"/"} element={<ContactsTable/>}>
+                        </Route>
+                        <Route path={"/new"} element={<NewContact/>}>
+                        </Route>
+                        <Route element={<h1>404</h1>}>
+                        </Route>
+                    </Routes>
+                </Main>
+            </Box>
+        </BrowserRouter>
     );
 }
 

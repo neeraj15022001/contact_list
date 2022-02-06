@@ -6,8 +6,6 @@ import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import ListItemText from "@mui/material/ListItemText";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
@@ -15,6 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import {styled, useTheme} from "@mui/material/styles";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {DrawerContext} from "../../../../context/DrawerContext";
+import {Link} from "react-router-dom";
 
 const drawerWidth = 240;
 const DrawerHeader = styled('div')(({theme}) => ({
@@ -52,11 +51,11 @@ function ContactsDrawer() {
             <List>
                 <ListItem>
                     <Button variant="outlined" startIcon={<AddIcon/>} sx={{width: "100%", borderRadius: "20px"}}>
-                        Create Icon
+                        <Link to={"/new"} style={{textDecoration: "none", color: "#5097DD"}}>Create Contact</Link>
                     </Button>
                 </ListItem>
                 {['Contacts'].map((text, index) => (
-                    <ListItem button key={text}>
+                    <ListItem selected={index === 0} button key={text}>
                         <ListItemIcon>
                             <AccountCircleIcon/>
                         </ListItemIcon>

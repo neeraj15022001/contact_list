@@ -14,6 +14,7 @@ import {alpha, styled} from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import InputBase from "@mui/material/InputBase";
 import {DrawerContext} from "../../../../context/DrawerContext";
+import {Link} from "react-router-dom";
 
 function ContactsAppBar() {
     const [open, setOpen] = useContext(DrawerContext)
@@ -93,7 +94,7 @@ function ContactsAppBar() {
                 <Box sx={{display:"flex", flexGrow: 1, alignItems: "center"}}>
                     <AccountCircle color={"primary"} sx={{fontSize: "2rem", marginRight: "8px"}}/>
                     <Typography variant="h6" noWrap component="div" sx={{flexGrow: 1}}>
-                        Contacts
+                        <Link to={"/"} style={{textDecoration: "none", color: "black"}}>Contacts</Link>
                     </Typography>
                 </Box>
                 <Search sx={{flexGrow: 1}}>

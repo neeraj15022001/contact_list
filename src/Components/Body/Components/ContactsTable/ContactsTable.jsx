@@ -30,8 +30,8 @@ function ContactsTable() {
                 <TableHead>
                     <TableRow>
                         <TableCell sx={{fontWeight: "bold"}}>Name</TableCell>
-                        <TableCell sx={{fontWeight: "bold"}} align="right">Email</TableCell>
                         <TableCell sx={{fontWeight: "bold"}} align="right">Phone&nbsp;Number</TableCell>
+                        <TableCell sx={{fontWeight: "bold"}} align="right">Email</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
