@@ -84,6 +84,8 @@ function ContactsAppBar() {
     }
     const handleChange = (e) => {
         // console.log(e.target.value, contacts)
+        //TODO: Contacts are updated after search and original array go away. Need to show all contacts after clearing field
+        // OR make a route for backend search and improve by debouncing
         setSearch(() => e.target.value)
         setContacts(findMatches(e.target.value, contacts))
     }
