@@ -124,3 +124,24 @@ module.exports.update = async (req, res) => {
         })
     }
 }
+
+module.exports.getContact = async (req, res) => {
+    console.log(req.query.id)
+    try {
+        let contact = await Contact.findById(req.query.id);
+        if(contact) {
+            return res.json(200, {
+                message: "contact retrieved successfully",
+                data: contact
+            })
+        } else {
+            return res.json(404, {
+                message: "contact not found"
+            })
+        }
+    } catch (e) {
+        return res.json(500, {
+            error: "Error while getting contact"
+        })
+    }
+}

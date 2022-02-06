@@ -54,14 +54,14 @@ function ContactsDrawer() {
                         <Link to={"/new"} style={{textDecoration: "none", color: "#5097DD"}}>Create Contact</Link>
                     </Button>
                 </ListItem>
-                {['Contacts'].map((text, index) => (
-                    <ListItem selected={index === 0} button key={text}>
-                        <ListItemIcon>
-                            <AccountCircleIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary={text}/>
-                    </ListItem>
-                ))}
+                <ListItem selected={true} button key={"Contacts"}>
+                    <ListItemIcon>
+                        <AccountCircleIcon/>
+                    </ListItemIcon>
+                    <Link to={"/"} style={{textDecoration:"none",color: "#686D73"}}>
+                        <ListItemText primary={"Contacts"}/>
+                    </Link>
+                </ListItem>
             </List>
         </Drawer>
     );

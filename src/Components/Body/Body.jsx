@@ -9,6 +9,8 @@ import {styled} from "@mui/material/styles";
 import ContactsAppBar from "./Components/ContactsAppBar/ContactsAppBar";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import NewContact from "./Components/NewContact/NewContact";
+import ContactPage from "./Components/ContactPage/ContactPage";
+import {ContactsProvider} from "../../context/ContactsContext";
 
 const drawerWidth = 240;
 const Main = styled('main', {shouldForwardProp: (prop) => prop !== 'open'})(
@@ -42,24 +44,26 @@ function Body() {
     const [open, setOpen] = useContext(DrawerContext);
     return (
         <BrowserRouter>
-            <Box sx={{display: 'flex'}}>
-                <CssBaseline/>
-                <ContactsAppBar/>
-                <ContactsDrawer/>
-                <Main open={open}>
-                    <DrawerHeader/>
-                    <Routes>
-                        <Route exact path={"/"} element={<ContactsTable/>}>
-                        </Route>
-                        <Route path={"/new"} element={<NewContact/>}>
-                        </Route>
-                        <Route element={<h1>404</h1>}>
-                        </Route>
-                    </Routes>
-                </Main>
-            </Box>
+            <ContactsProvider>
+                <Box sx={{display: 'flex'}}>
+                    <CssBaseline/>
+                    <ContactsAppBar/>
+                    <ContactsDrawer/>
+                    <Main open={open}>
+                        <DrawerHeader/>
+                        <Routes>
+                            <Route exact path={"/"} element={<ContactsTable/>}/>
+                            <Route path={"/new"} element={<NewContact/>}/>
+                            <Route path={"/contacts/:id"} element={<ContactPage/>}/>
+                            <Route element={<h1>404</h1>}>
+                            </Route>
+                        </Routes>
+                    </Main>
+                </Box>
+            </ContactsProvider>
         </BrowserRouter>
-    );
+    )
+        ;
 }
 
 export default Body;

@@ -1,23 +1,22 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
 import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
-import Badge from "@mui/material/Badge";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MoreIcon from "@mui/icons-material/MoreVert";
 import {alpha, styled} from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import InputBase from "@mui/material/InputBase";
 import {DrawerContext} from "../../../../context/DrawerContext";
 import {Link} from "react-router-dom";
+import {ContactsContext} from "../../../../context/ContactsContext";
 
 function ContactsAppBar() {
-    const [open, setOpen] = useContext(DrawerContext)
+    const [open, setOpen] = useContext(DrawerContext);
+    const [contacts, setContacts] = useContext(ContactsContext);
+    const [search, setSearch] = useState("");
     const drawerWidth = 240;
     const AppBar = styled(MuiAppBar, {
         shouldForwardProp: (prop) => prop !== 'open',
@@ -78,6 +77,19 @@ function ContactsAppBar() {
             },
         },
     }));
+    const findMatches = (wordToMatch, contacts) => {
+        // console.log(arr)
+        return contacts.filter(contact => {
+            // here we need to figure out if the city or state matches what was searched
+            const regex = new RegExp(wordToMatch, 'gi');
+            return contact.name.match(regex) || contact.mobile.toString().match(regex) || contact.email.match(regex)
+        });
+    }
+    const handleChange = (e) => {
+        // console.log(e.target.value, contacts)
+        setSearch(e.target.value)
+        setContacts(findMatches(e.target.value, contacts))
+    }
     return (
         <AppBar position="fixed" open={open} color={"transparent"} elevation={0}>
             <Toolbar>
@@ -91,61 +103,23 @@ function ContactsAppBar() {
                     <MenuIcon/>
                 </IconButton>
 
-                <Box sx={{display:"flex", flexGrow: 1, alignItems: "center"}}>
+                <Box sx={{display: "flex", flexGrow: 1, alignItems: "center"}}>
                     <AccountCircle color={"primary"} sx={{fontSize: "2rem", marginRight: "8px"}}/>
                     <Typography variant="h6" noWrap component="div" sx={{flexGrow: 1}}>
                         <Link to={"/"} style={{textDecoration: "none", color: "black"}}>Contacts</Link>
                     </Typography>
                 </Box>
-                <Search sx={{flexGrow: 1}}>
+                <Search>
                     <SearchIconWrapper>
                         <SearchIcon/>
                     </SearchIconWrapper>
                     <StyledInputBase
                         placeholder="Search"
                         inputProps={{'aria-label': 'search'}}
+                        onChange={handleChange}
+                        value={search}
                     />
                 </Search>
-                <Box sx={{flexGrow: 1}}/>
-                <Box sx={{display: {xs: 'none', md: 'flex'}}}>
-                    <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                        <Badge badgeContent={4} color="error">
-                            <MailIcon/>
-                        </Badge>
-                    </IconButton>
-                    <IconButton
-                        size="large"
-                        aria-label="show 17 new notifications"
-                        color="inherit"
-                    >
-                        <Badge badgeContent={17} color="error">
-                            <NotificationsIcon/>
-                        </Badge>
-                    </IconButton>
-                    <IconButton
-                        size="large"
-                        edge="end"
-                        aria-label="account of current user"
-                        // aria-controls={menuId}
-                        aria-haspopup="true"
-                        // onClick={handleProfileMenuOpen}
-                        color="inherit"
-                    >
-                        <AccountCircle/>
-                    </IconButton>
-                </Box>
-                <Box sx={{display: {xs: 'flex', md: 'none'}}}>
-                    <IconButton
-                        size="large"
-                        aria-label="show more"
-                        // aria-controls={mobileMenuId}
-                        aria-haspopup="true"
-                        // onClick={handleMobileMenuOpen}
-                        color="inherit"
-                    >
-                        <MoreIcon/>
-                    </IconButton>
-                </Box>
             </Toolbar>
         </AppBar>
     );
