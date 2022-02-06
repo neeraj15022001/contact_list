@@ -1,12 +1,15 @@
 import React from 'react';
 import "./App.css";
 import Body from "../Body/Body"
+import {DrawerProvider} from "../../context/DrawerContext";
 
 const App = () => {
     return (
-        <div>
-            <Body/>
-        </div>
+        <DrawerProvider>
+            <div>
+                <Body/>
+            </div>
+        </DrawerProvider>
     );
 };
 

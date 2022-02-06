@@ -1,5 +1,5 @@
 const Contact = require("../../../models/contact_schema")
-module.exports.new = async (req, res) => {
+module.exports.create = async (req, res) => {
     // console.log(req.body);
     try {
         //check if contact with same email and mobile number
@@ -24,6 +24,19 @@ module.exports.new = async (req, res) => {
             message: 'Error while creating contact',
             error: e
         });
+    }
+}
+module.exports.read = async (req, res) => {
+    try {
+        let contacts = await Contact.find({});
+        return res.json(200, {
+            message: "Successfully Retrieved Contacts",
+            data: contacts
+        })
+    } catch (e) {
+        return res.json(500, {
+            message: "Error While Retrieving Users"
+        })
     }
 }
 module.exports.delete = async (req, res) => {
@@ -54,7 +67,6 @@ module.exports.delete = async (req, res) => {
         })
     }
 }
-
 module.exports.update = async (req, res) => {
     console.log(req.query);
     try {
