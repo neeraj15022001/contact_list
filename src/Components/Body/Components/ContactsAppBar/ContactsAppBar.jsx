@@ -70,10 +70,7 @@ function ContactsAppBar() {
             transition: theme.transitions.create('width'),
             width: '100%',
             [theme.breakpoints.up('sm')]: {
-                width: '12ch',
-                '&:focus': {
-                    width: '20ch',
-                },
+                width: '20ch',
             },
         },
     }));
@@ -87,7 +84,7 @@ function ContactsAppBar() {
     }
     const handleChange = (e) => {
         // console.log(e.target.value, contacts)
-        setSearch(e.target.value)
+        setSearch(() => e.target.value)
         setContacts(findMatches(e.target.value, contacts))
     }
     return (
@@ -118,6 +115,7 @@ function ContactsAppBar() {
                         inputProps={{'aria-label': 'search'}}
                         onChange={handleChange}
                         value={search}
+                        autoFocus={true}
                     />
                 </Search>
             </Toolbar>
