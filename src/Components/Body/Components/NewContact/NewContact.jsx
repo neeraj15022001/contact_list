@@ -10,7 +10,7 @@ function NewContact() {
     const [inputs, setInputs] = useState({name: "", email: "", mobile: ""})
     const createContact = (e) => {
         e.preventDefault();
-        fetch("/api/v1/contacts/create", {
+        fetch("https://contacts-list-api-v1.herokuapp.com/api/v1/contacts/create", {
             method: "post", body: JSON.stringify(inputs), headers: {
                 "Content-Type": "application/json"
             }

@@ -45,7 +45,7 @@ function ContactsTable() {
     }
     useEffect(() => {
         let mounted = true
-        fetch("/api/v1/contacts/read")
+        fetch("https://contacts-list-api-v1.herokuapp.com/api/v1/contacts/read")
             .then(res => {
                 return res.json()
             })
