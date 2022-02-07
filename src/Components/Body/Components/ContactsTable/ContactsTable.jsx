@@ -25,7 +25,7 @@ function ContactsTable() {
         const contactID = e.currentTarget.dataset.id;
         setDisabled(() => !disabled)
         if (action === "delete") {
-            fetch(`/contacts/delete?id=${contactID}`, {
+            fetch(`/api/v1/contacts/delete?id=${contactID}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())
@@ -45,7 +45,7 @@ function ContactsTable() {
     }
     useEffect(() => {
         let mounted = true
-        fetch("/contacts/read")
+        fetch("/api/v1/contacts/read")
             .then(res => {
                 return res.json()
             })

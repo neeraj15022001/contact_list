@@ -75,7 +75,7 @@ function ContactsAppBar() {
         },
     }));
     const searchResult = (query) => {
-        fetch(`/contacts/search?search=${query}`)
+        fetch(`/api/v1/contacts/search?search=${query}`)
             .then(res => res.json())
             .then(res => {
                 // console.log(res)
