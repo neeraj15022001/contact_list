@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "db11cdf0-b258-473e-86c9-f23504c6299a",
+		"name": "Contacts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Read Contacts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/contacts/read",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						"read"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Contact",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/contacts/delete?id=61ffda353477b1e09c306ecc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "61ffda353477b1e09c306ecc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Contact",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"Sapna\",\n    \"mobile\" : \"9464364926\",\n    \"email\" : \"gsapna301@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/contacts/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Contact",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/contacts/search?search=nee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						"search"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "nee"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/contacts?id=6200f5e3784da129df7ae0e7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"contacts"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6200f5e3784da129df7ae0e7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Contact",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/contacts/update?id=61ffda353477b1e09c306ecc&name=ng&email=ng@gmail.com&mobile=8847624755",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "61ffda353477b1e09c306ecc"
+						},
+						{
+							"key": "name",
+							"value": "ng"
+						},
+						{
+							"key": "email",
+							"value": "ng@gmail.com"
+						},
+						{
+							"key": "mobile",
+							"value": "8847624755"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
