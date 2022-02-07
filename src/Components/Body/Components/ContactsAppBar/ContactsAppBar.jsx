@@ -74,20 +74,29 @@ function ContactsAppBar() {
             },
         },
     }));
-    const findMatches = (wordToMatch, contacts) => {
-        // console.log(arr)
-        return contacts.filter(contact => {
-            // here we need to figure out if the city or state matches what was searched
-            const regex = new RegExp(wordToMatch, 'gi');
-            return contact.name.match(regex) || contact.mobile.toString().match(regex) || contact.email.match(regex)
-        });
+    const debounce = (func, delay) => {
+        let debounceTimer
+        return function () {
+            const context = this
+            const args = arguments
+            clearTimeout(debounceTimer)
+            debounceTimer
+                = setTimeout(() => func.apply(context, args), delay)
+        }
+    }
+    const searchResult = (query) => {
+        fetch(`/contacts/search?search=${query}`)
+            .then(res => res.json())
+            .then(res => {
+                // console.log(res)
+                setContacts(() => res.data)
+            })
+            .catch(err => console.log(err))
     }
     const handleChange = (e) => {
-        // console.log(e.target.value, contacts)
-        //TODO: Contacts are updated after search and original array go away. Need to show all contacts after clearing field
-        // OR make a route for backend search and improve by debouncing
+        // console.log(e.target.value)
         setSearch(() => e.target.value)
-        setContacts(findMatches(e.target.value, contacts))
+        debounce(searchResult(e.target.value), 3000)
     }
     return (
         <AppBar position="fixed" open={open} color={"transparent"} elevation={0}>

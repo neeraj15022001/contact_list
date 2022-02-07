@@ -1,4 +1,5 @@
-const Contact = require("../../../models/contact_schema")
+const Contact = require("../../../models/contact_schema");
+const {findMatches} = require("../../../functions/search")
 module.exports.create = async (req, res) => {
     // console.log(req.body);
     try {
@@ -129,7 +130,7 @@ module.exports.getContact = async (req, res) => {
     console.log(req.query.id)
     try {
         let contact = await Contact.findById(req.query.id);
-        if(contact) {
+        if (contact) {
             return res.json(200, {
                 message: "contact retrieved successfully",
                 data: contact
@@ -142,6 +143,27 @@ module.exports.getContact = async (req, res) => {
     } catch (e) {
         return res.json(500, {
             error: "Error while getting contact"
+        })
+    }
+}
+
+module.exports.searchContact = async (req, res) => {
+    const query = req.query.search
+    try {
+        let result = await Contact.find({});
+        if (result) {
+            return res.json(200, {
+                message: "Searched successfully",
+                data: findMatches(query, result)
+            });
+        } else {
+            return res.json(404, {
+                message: "Users Not Found"
+            })
+        }
+    } catch (e) {
+        return res.json(500, {
+            error: e
         })
     }
 }
