@@ -75,7 +75,7 @@ function ContactsAppBar() {
         },
     }));
     const searchResult = (query) => {
-        fetch(`https://contacts-list-api-v1.herokuapp.com/api/v1/contacts/search?search=${query}`)
+        fetch(`https://contacts-list-api-v1.herokuapp.com/api/v1/contacts/search?search=${query}`, {mode: "no-cors"})
             .then(res => res.json())
             .then(res => {
                 // console.log(res)

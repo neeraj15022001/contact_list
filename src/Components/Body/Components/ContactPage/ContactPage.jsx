@@ -16,7 +16,7 @@ function ContactPage() {
 
     useEffect(() => {
         let mounted = true
-        fetch(`https://contacts-list-api-v1.herokuapp.com/api/v1/contacts?id=${id}`)
+        fetch(`https://contacts-list-api-v1.herokuapp.com/api/v1/contacts?id=${id}`,{mode: "no-cors"})
             .then(res => {
                 return res.json()
             })
@@ -42,7 +42,7 @@ function ContactPage() {
         e.preventDefault()
         fetch(`https://contacts-list-api-v1.herokuapp.com/api/v1/contacts/update?id=${contact._id}&name=${contact.name}&email=${contact.email}&mobile=${contact.mobile}`, {
             method: "PUT",
-            redirect: "follow"
+            mode: "no-cors"
         })
             .then(res => res.json())
             .then(res => {

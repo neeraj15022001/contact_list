@@ -11,7 +11,7 @@ function NewContact() {
     const createContact = (e) => {
         e.preventDefault();
         fetch("https://contacts-list-api-v1.herokuapp.com/api/v1/contacts/create", {
-            method: "post", body: JSON.stringify(inputs), headers: {
+            method: "post", body: JSON.stringify(inputs),mode: "no-cors", headers: {
                 "Content-Type": "application/json"
             }
         })
