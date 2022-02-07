@@ -29,7 +29,7 @@ module.exports.create = async (req, res) => {
 }
 module.exports.read = async (req, res) => {
     try {
-        let contacts = await Contact.find({});
+        let contacts = await Contact.find({}).sort("-updatedAt");
         return res.json(200, {
             message: "Successfully Retrieved Contacts",
             data: contacts
@@ -109,11 +109,17 @@ module.exports.update = async (req, res) => {
                 contact.mobile = req.query.mobile;
             }
             //    saving contact after updating
-            await contact.save();
-            return res.json(200, {
-                message: "Contact Updated Successfully",
-                data: contact
-            })
+            contact.save()
+                .then(savedDoc => {
+                    return res.json(200, {
+                        message: "Contact Updated Successfully",
+                        data: contact
+                    })
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+
         } else {
             return res.json(404, {
                 message: "No User Found"

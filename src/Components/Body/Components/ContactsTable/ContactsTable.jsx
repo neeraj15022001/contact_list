@@ -101,9 +101,14 @@ function ContactsTable() {
                                     </Link>
                                 </Tooltip>
                                 <Tooltip title={"Edit"}>
-                                    <IconButton aria-label={"edit"} disabled={disabled}>
-                                        <EditOutlinedIcon color={disabled ? "disabled" : "primary"}/>
-                                    </IconButton>
+                                    <Link to={`/contacts/${row._id}?edit=true`}>
+                                        <IconButton aria-label={"edit"} disabled={disabled} data-id={row._id}
+                                                    data-action={"edit"}>
+                                            <EditOutlinedIcon color={disabled ? "disabled" : "primary"}
+                                                              data-id={row._id}
+                                                              data-action={"edit"}/>
+                                        </IconButton>
+                                    </Link>
                                 </Tooltip>
                                 <Tooltip title={"Delete"}>
                                     <IconButton aria-label={"delete"} onClick={handleClick} data-action={"delete"}
