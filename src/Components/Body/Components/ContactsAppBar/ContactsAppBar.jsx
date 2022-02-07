@@ -74,16 +74,6 @@ function ContactsAppBar() {
             },
         },
     }));
-    const debounce = (func, delay) => {
-        let debounceTimer
-        return function () {
-            const context = this
-            const args = arguments
-            clearTimeout(debounceTimer)
-            debounceTimer
-                = setTimeout(() => func.apply(context, args), delay)
-        }
-    }
     const searchResult = (query) => {
         fetch(`/contacts/search?search=${query}`)
             .then(res => res.json())
@@ -96,7 +86,7 @@ function ContactsAppBar() {
     const handleChange = (e) => {
         // console.log(e.target.value)
         setSearch(() => e.target.value)
-        debounce(searchResult(e.target.value), 3000)
+        searchResult(e.target.value)
     }
     return (
         <AppBar position="fixed" open={open} color={"transparent"} elevation={0}>
@@ -124,8 +114,8 @@ function ContactsAppBar() {
                     <StyledInputBase
                         placeholder="Search"
                         inputProps={{'aria-label': 'search'}}
-                        onChange={handleChange}
                         value={search}
+                        onChange={handleChange}
                         autoFocus={true}
                     />
                 </Search>
